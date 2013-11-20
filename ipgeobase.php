@@ -14,11 +14,27 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    E-mail: vladislav.ross@gmail.com
 	
 */
+/*
+ * @class IPGeoBase
+ * @brief Класс для работы с текстовыми базами ipgeobase.ru
+ * @see example.php
+ *
+ * Определяет страну, регион и город по IP для России и Украины
+ */
 class IPGeoBase 
 {
 	private $fhandleCIDR, $fhandleCities, $fSizeCIDR, $fsizeCities;
+
+    /*
+     * @brief Конструктор
+     *
+     * @param CIDRFile файл базы диапазонов IP (cidr_optim.txt)
+     * @param CitiesFile файл базы городов (cities.txt)
+     */
 	function __construct($CIDRFile = false, $CitiesFile = false)
 	{
 		if(!$CIDRFile)
@@ -34,7 +50,12 @@ class IPGeoBase
 		$this->fSizeCIDR = filesize($CIDRFile);
 		$this->fsizeCities = filesize($CitiesFile);
 	}
-	
+
+    /*
+     * @brief Получение информации о городе по индексу
+     * @param idx индекс города
+     * @return массив или false, если не найдено
+     */
 	private function getCityByIdx($idx)
 	{
 		rewind($this->fhandleCities);
@@ -53,7 +74,12 @@ class IPGeoBase
 		}
 		return false;
 	}
-	
+
+    /*
+     * @brief Получение гео-информации по IP
+     * @param ip IPv4-адрес
+     * @return массив или false, если не найдено
+     */
 	function getRecord($ip)
 	{
 		$ip = sprintf('%u', ip2long($ip));
