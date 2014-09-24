@@ -78,6 +78,26 @@ class IPGeoBase
 		}
 		return false;
 	}
+        
+        
+        
+    /**
+     * список городов, удобно для селекта, например
+     * @return массив городов
+     */
+        function getCityList()
+        {
+            rewind($this->fhandleCities);
+            $cityList = array();
+            while (!feof($this->fhandleCities))
+            {
+                $str        = fgets($this->fhandleCities);
+                $arRecord   = explode("\t", trim($str));
+                $cityList[] = $arRecord[1];
+            }
+            return $cityList;
+        }
+        
 
     /*
      * @brief Получение гео-информации по IP
