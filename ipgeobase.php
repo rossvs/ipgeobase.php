@@ -73,7 +73,8 @@ class IPGeoBase
 								'region' => $arRecord[2],
 								'district' => $arRecord[3],
 								'lat' => $arRecord[4],
-								'lng' => $arRecord[5]);
+								'lng' => $arRecord[5],
+								'id' => $arRecord[0] );
 			}
 		}
 		return false;
